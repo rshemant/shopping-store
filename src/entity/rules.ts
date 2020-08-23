@@ -1,6 +1,7 @@
 import Item from '../entity/item';
 import ItemCatalog from './products-catalogue';
 import { SKU } from '../lib/enums';
+
 export abstract class Rule {
   abstract updateItemsPrice(items: Item[]): Item[];
 }
@@ -74,17 +75,21 @@ export class BulkBuyFlatDiscountRule extends Rule {
     const ruleApplicableItems = items.filter(v => v.sku === this.sku);
 
     // marking price to discounted price in case of remainderIndex greater than numberOfUnits(4).
-    const modifiesItems = ruleApplicableItems.map((value, index) => {
-      let remainderIndex = index + 1;
-
-      if (remainderIndex > this.numberOfUnits) {
+    const countOfItems = ruleApplicableItems.length;
+    let modifiedItems: Item[] = [];
+    if (countOfItems > this.numberOfUnits) {
+      modifiedItems = ruleApplicableItems.map(value => {
         value.priceCents = this.discountedPriceCents;
-      }
 
-      return value;
-    });
+        return value;
+      });
+    }
+    // HighlightNote: avoiding use of else , as its good practice
+    if (countOfItems <= this.numberOfUnits) {
+      modifiedItems = ruleApplicableItems;
+    }
 
-    const resultItems: Item[] = [...ruleNonAApplicableItems, ...modifiesItems];
+    const resultItems: Item[] = [...ruleNonAApplicableItems, ...modifiedItems];
 
     return resultItems;
   }

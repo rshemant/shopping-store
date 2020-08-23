@@ -70,7 +70,14 @@ describe('Rule Test', () => {
     ]);
   });
 
-  it('More than N items flat Bulk Discount Rule', () => {
+  it('More than N items flat Bulk Discount Rule: Less or equal to than 4 iPads', () => {
+    const items = [ipd(), ipd(), ipd(), ipd()];
+    const discountedItems = bulkBuyFlatDiscountRule.updateItemsPrice(items);
+
+    expect(discountedItems).toEqual([ipd(), ipd(), ipd(), ipd()]);
+  });
+
+  it('More than N items flat Bulk Discount Rule: more than 4 iPads', () => {
     const items = [ipd(), ipd(), ipd(), ipd(), ipd(), ipd()];
     const discountedItems = bulkBuyFlatDiscountRule.updateItemsPrice(items);
 
@@ -81,10 +88,10 @@ describe('Rule Test', () => {
         priceCents: 49999,
       });
     expect(discountedItems).toEqual([
-      ipd(),
-      ipd(),
-      ipd(),
-      ipd(),
+      changedIpd(),
+      changedIpd(),
+      changedIpd(),
+      changedIpd(),
       changedIpd(),
       changedIpd(),
     ]);
