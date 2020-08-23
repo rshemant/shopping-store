@@ -1,15 +1,16 @@
+import { SKU } from '../lib/enums';
 interface ItemProp {
-  sku: string;
+  sku: SKU;
   name: string;
   priceCents: number;
 }
 
 export default class Item {
-  private _sku: string;
-  public get sku(): string {
+  private _sku: SKU;
+  public get sku(): SKU {
     return this._sku;
   }
-  public set sku(v: string) {
+  public set sku(v: SKU) {
     this._sku = v;
   }
 
