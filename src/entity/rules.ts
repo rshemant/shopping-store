@@ -154,7 +154,7 @@ export class BundleDiscountRule extends Rule {
     });
 
     // if free item is not present adding to cart
-    const freeItem = ItemCatalog.getItem(this.freeSku);
+    const freeItem = ItemCatalog.getProduct(this.freeSku);
     freeItem.priceCents = 0;
     while (numberOfFreeItemsOffered > 0) {
       numberOfFreeItemsOffered--;

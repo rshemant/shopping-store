@@ -7,6 +7,7 @@ import {
 import Checkout from '../src/entity/checkout';
 import Item from '../src/entity/item';
 import { SKU } from '../src/lib/enums';
+import ProductsCatalogue from '../src/entity/products-catalogue';
 
 describe('Checkout Test', () => {
   const atv = () =>
@@ -33,6 +34,8 @@ describe('Checkout Test', () => {
       name: 'VGA adapter',
       priceCents: 3000,
     });
+
+  ProductsCatalogue.setProductsCatalogue([atv(), mbp(), ipd(), vga()]);
 
   const buyNPayForMDealRule = new BuyNPayForMDealRule({
     sku: SKU.ATV,
