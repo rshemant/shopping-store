@@ -66,10 +66,10 @@ describe('Checkout Test', () => {
     checkout.scan(atv());
     checkout.scan(vga());
 
-    expect(checkout.total()).toEqual(24900);
+    expect(checkout.total()).toEqual('$249.00');
   });
 
-  it('SKUs Scanned: atv, atv, atv, vga Total expected: $249.00', () => {
+  it('SKUs Scanned: atv, ipd, ipd, atv, ipd, ipd, ipd Total expected: $2718.95', () => {
     const checkout = new Checkout({ rules });
     checkout.scan(atv());
     checkout.scan(ipd());
@@ -79,7 +79,7 @@ describe('Checkout Test', () => {
     checkout.scan(ipd());
     checkout.scan(ipd());
 
-    expect(checkout.total()).toEqual(271895);
+    expect(checkout.total()).toEqual('$2718.95');
   });
 
   it('SKUs Scanned: mbp, vga, ipd Total expected: $1949.98', () => {
@@ -88,6 +88,6 @@ describe('Checkout Test', () => {
     checkout.scan(vga());
     checkout.scan(ipd());
 
-    expect(checkout.total()).toEqual(194998);
+    expect(checkout.total()).toEqual('$1949.98');
   });
 });

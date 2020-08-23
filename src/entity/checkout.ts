@@ -1,5 +1,6 @@
 import { Rule } from './rules';
 import Item from './item';
+import { centsToDollars } from '../lib/utils';
 
 interface CheckoutProp {
   rules: Rule[];
@@ -16,7 +17,7 @@ export default class Checkout {
     this.items.push(item);
   }
 
-  total() {
+  total(): string {
     let discountedItems: Item[] = this.items;
 
     this.rules.forEach(rule => {
@@ -27,6 +28,8 @@ export default class Checkout {
       .map(it => it.priceCents)
       .reduce((prev, next) => prev + next);
 
-    return totalPriceCents;
+    const dollars = centsToDollars(totalPriceCents);
+
+    return dollars;
   }
 }
